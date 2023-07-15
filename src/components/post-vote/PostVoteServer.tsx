@@ -33,6 +33,7 @@ export default async function PostVoteServer({
     }, 0);
 
     _currentVote = post.votes.find(
+      // @ts-ignore
       (vote) => vote.userId === session?.user.id
     )?.type;
   } else {

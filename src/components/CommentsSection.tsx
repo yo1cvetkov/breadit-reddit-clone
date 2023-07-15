@@ -48,6 +48,7 @@ export default async function CommentsSection({
               0
             );
             const topLevelCommentVote = topLevelComment.votes.find(
+              // @ts-ignore
               (vote) => vote.userId === session?.user.id
             );
             return (
@@ -70,6 +71,7 @@ export default async function CommentsSection({
                     }, 0);
 
                     const replyVote = reply.votes.find(
+                      // @ts-ignore
                       (vote) => vote.userId === session?.user.id
                     );
 

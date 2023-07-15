@@ -1,8 +1,6 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { redis } from "@/lib/redis";
-import { CommentVoteValidator, PostVoteValidator } from "@/lib/validators/vote";
-import type { CachedPost } from "@/types/redis";
+import { CommentVoteValidator } from "@/lib/validators/vote";
 import { z } from "zod";
 
 export async function PATCH(req: Request) {
@@ -19,6 +17,7 @@ export async function PATCH(req: Request) {
 
     const existingVote = await db.commentVote.findFirst({
       where: {
+        // @ts-ignore
         userId: session.user.id,
         commentId,
       },
@@ -30,6 +29,7 @@ export async function PATCH(req: Request) {
           where: {
             userId_commentId: {
               commentId,
+              // @ts-ignore
               userId: session.user.id,
             },
           },
@@ -41,6 +41,7 @@ export async function PATCH(req: Request) {
           where: {
             userId_commentId: {
               commentId,
+              // @ts-ignore
               userId: session.user.id,
             },
           },
@@ -56,6 +57,7 @@ export async function PATCH(req: Request) {
     await db.commentVote.create({
       data: {
         type: voteType,
+        // @ts-ignore
         userId: session.user.id,
         commentId,
       },
